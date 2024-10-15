@@ -6,6 +6,7 @@ import axios from "axios";
 
 function App() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); // For handling errors
 
   useEffect(() => {
@@ -13,9 +14,11 @@ function App() {
       try {
         const response = await axios.get("https://xcountries-backend.azurewebsites.net/all");
         setData(response.data);
+        setLoading(false);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.log("Error fetching data: ",error);
         setError("Failed to fetch countries data.");
+        setLoading(false);
       }
     };
 
@@ -23,15 +26,19 @@ function App() {
   }, []);
 
   return (
-    <div className="wrapper">
-      {error && <p>{error}</p>} {/* Display error message if any */}
-      {data.map((country) => (
-        <div key={`${country.name}-${country.abbr}`}>
-          <Countries name={country.name} flag={country.flag} abbr={country.abbr} />
+    <div>
+      {loading ? (
+        <p>Loading...</p> // Display loading text
+      ) : (
+        <div className="wrapper">
+          {data.map((country) => (
+            <div key={`${country.name}-${country.abbr}`}>
+              <Countries name={country.name} flag={country.flag} abbr={country.abbr} />
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }
-
 export default App;
