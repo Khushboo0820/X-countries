@@ -1,0 +1,28 @@
+.card{
+    height: 200x;
+    width: 150px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:10px;
+    padding-top: 7px;
+   
+}
+
+.card img{
+    height: 90px;
+    width: 90px;
+    
+   
+    
+}
+
+.text{
+    padding: 5px;
+    text-align: center;
+    
+   
+}
